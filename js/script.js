@@ -1,6 +1,5 @@
-//функция которая устанавливает таймер
-//функция которая определяет разницу между временем
-//функция обновления таймера
+//функция открытия окон
+//функция закрытия окон
 
 window.addEventListener('DOMContentLoaded', () =>{
     //Tabs
@@ -97,5 +96,39 @@ window.addEventListener('DOMContentLoaded', () =>{
     }
 
     setClock('.timer', deadline);
+
+    //Modal
+    //=====================================================================================
+    
+    const modal = document.querySelector('.modal'),
+          modalTrigger = document.querySelectorAll('[data-modal]'),
+          modalCloseBtn = document.querySelector('[data-close]');
+
+    modalTrigger.forEach(btn =>{
+        btn.addEventListener('click', () =>{
+        modal.classList.toggle('show');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    
+    function closeModal(){
+        modal.classList.toggle('show');
+        document.body.style.overflow = '';
+    }
+    
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (event) =>{
+        if (event.target === modal){
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (event) =>{
+        if(event.code === 'Escape' && modal.classList.contains('show')){
+            closeModal();
+        }
+    });
 
 });
